@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NASA API Test</title>
+</head>
+<body>
+    <div class="container">
+        <h1>NASA Live API test</h1>
+        <p>By Nithish S, authenticated</p>
+        <input type="text" id="search-input" placeholder="Search for images...">
+        <button id="search-button" class="buttons">Search</button>
+        <button id="track-button"  class="buttons">Track</button>
+        <button id="live-button"  class="buttons">Live View</button>
+        <div id="results"></div>
+    </div>
+
+    <style>
+body {
+    font-family: Arial, sans-serif;
+    text-align: center;
+    background-color: #021f2a;
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    max-width: 100%;
+    margin: 50px auto;
+    background: #bad0f3;
+    padding: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+    margin-bottom: 20px;
+    padding: 10px;
+    border-radius: 16px;
+}
+
+#results img {
+    margin: 10px;
+    cursor: pointer;
+}
+
+input, button {
+    padding: 10px;
+    margin: 10px;
+    font-size: 16px;
+}
+
+h2 {
+    margin-top: 30px;
+}
+
+.buttons{
+
+  border: solid 1px lightgrey;
+  border-radius: 12px;
+  padding-left: 15px;
+  padding-right: 15px;
+  cursor: pointer;
+}
+
+#search-input{
+
+  border-radius: 18px;
+  border: solid 1px lightgrey;
+}
+
+#results{
+
+  height: 900px;
+  overflow: scroll;
+  scroll-behavior: smooth;
+}
+
+
+
+    </style>
+    <script>
+
+document.addEventListener("DOMContentLoaded", function() {
+    const API_KEY = '6j2ZUe0vcCbFriDp9T2TVQlhHYMYrmYwEMpJBSCA';
+    const SEARCH_URL = 'https://images-api.nasa.gov/search';
+    const APOD_URL = `https://api.nasa.gov/planetary/apod?api_key=${API_KEY}`;
+    const EPIC_URL = `https://api.nasa.gov/EPIC/api/natural?api_key=${API_KEY}`;
+    const NEO_URL = `https://api.nasa.gov/neo/rest/v1/feed?api_key=${API_KEY}`;
+
+    document.getElementById('search-button').addEventListener('click', function() {
+        const query = document.getElementById('search-input').value;
+        if (query.trim() === '') {
+            alert('Please enter a search term');
+            return;
+        }
+
+        fetch(`${SEARCH_URL}?q=${query}&media_type=image`)
+            .then(response => response.json())
+            .then(data => {
+                const resultsDiv = document.getElementById('results');
+                resultsDiv.innerHTML = '';
+                if (data.collection.items.length === 0) {
+                    resultsDiv.innerHTML = '<p>No results found</p>';
+                    return;
+                }
+
+                data.collection.items.forEach(item => {
+                    const img = document.createElement('img');
+                    img.src = item.links[0].href;
+                    img.alt = item.data[0].title;
+                    img.title = item.data[0].title;
+                    resultsDiv.appendChild(img);
+                });
+            })
+            .catch(error => console.error('Error fetching data:', error));
+    });
+
+    document.getElementById('track-button').addEventListener('click', function() {
+        const resultsDiv = document.getElementById('results');
+        resultsDiv.innerHTML = '';
+
+        // Fetch Astronomy Picture of the Day
+        fetch(APOD_URL)
+            .then(response => response.json())
+            .then(data => {
+                const apodContainer = document.createElement('div');
+                apodContainer.innerHTML = `
+                    <h2>Astronomy Picture of the Day</h2>
+                    <h3>${data.title}</h3>
+                    <img src="${data.url}" alt="${data.title}">
+                    <p>${data.explanation}</p>
+                `;
+                resultsDiv.appendChild(apodContainer);
+            })
+            .catch(error => console.error('Error fetching APOD:', error));
+
+        // Fetch EPIC images
+        fetch(EPIC_URL)
+            .then(response => response.json())
+            .then(data => {
+                const epicContainer = document.createElement('div');
+                epicContainer.innerHTML = '<h2>EPIC Images</h2>';
+                data.slice(0, 5).forEach(item => {
+                    const date = item.date.split(' ')[0].replace(/-/g, '/');
+                    const imgSrc = `https://epic.gsfc.nasa.gov/archive/natural/${date}/png/${item.image}.png`;
+                    epicContainer.innerHTML += `
+                        <img src="${imgSrc}" alt="${item.caption}" title="${item.caption}">
+                    `;
+                });
+                resultsDiv.appendChild(epicContainer);
+            })
+            .catch(error => console.error('Error fetching EPIC images:', error));
+
+        // Fetch NeoWs data
+        fetch(NEO_URL)
+            .then(response => response.json())
+            .then(data => {
+                const neoContainer = document.createElement('div');
+                neoContainer.innerHTML = '<h2>Near Earth Objects (NEOs)</h2>';
+                Object.keys(data.near_earth_objects).forEach(date => {
+                    data.near_earth_objects[date].forEach(neo => {
+                        neoContainer.innerHTML += `
+                            <div>
+                                <h3>${neo.name}</h3>
+                                <p>Date: ${date}</p>
+                                <p>Estimated Diameter: ${neo.estimated_diameter.kilometers.estimated_diameter_min.toFixed(2)} - ${neo.estimated_diameter.kilometers.estimated_diameter_max.toFixed(2)} km</p>
+                                <p>Potentially Hazardous: ${neo.is_potentially_hazardous_asteroid ? 'Yes' : 'No'}</p>
+                            </div>
+                        `;
+                    });
+                });
+                resultsDiv.appendChild(neoContainer);
+            })
+            .catch(error => console.error('Error fetching NEO data:', error));
+    });
+
+    document.getElementById('live-button').addEventListener('click', function() {
+        const resultsDiv = document.getElementById('results');
+        resultsDiv.innerHTML = '';
+
+        // Embed NASA's HDEV live stream
+        const liveContainer = document.createElement('div');
+        liveContainer.innerHTML = `
+            <h2>Live View of Earth from ISS</h2>
+            <iframe src="https://www.youtube.com/embed/86YLFOog4GM" width="560" height="315" frameborder="0" allowfullscreen></iframe>
+        `;
+        resultsDiv.appendChild(liveContainer);
+    });
+});
+
+
+
+    </script>
+
+    <p style="color: white;">NASA &nbsp; API can also be wrong sometimes. So, Check once</p>
+</body>
+</html>
