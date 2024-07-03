@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>News web</title>
+</head>
+<body>
+
+	<div class="flex">
+		<input type="name" title="search news" placeholder="Search for a News" id="search">
+		<button id="submit" onclick="search()">Search News</button>
+	</div>
+
+
+	<div class="boxes">
+		<div class="results">
+			<center>
+			<h1 id="title"></h1>
+			</center>
+			<h5 id=""></h5>
+			<br>
+			<p ><a id="image"></a></p>
+			<p><span id="article"></span></p>
+			<h4>Content: <span id="content"></span></h4>
+			<p>Writer: <span id="writer"></span></p>
+			<p>Date: <span id="date"></span></p>
+
+
+
+		</div>
+	</div>
+<style>
+	
+	#search{
+
+		width: 80%;
+		height: 30px;
+		border-radius: 12px;
+		border: solid 1px grey;
+	}
+
+	#submit{
+
+		width: 18%;
+		height: 35px;
+		border: solid 1px lightgrey;
+		border-radius: 16px;
+		cursor: pointer;
+	}
+
+	.flex{
+
+		display: flex;
+		flex-wrap: wrap;
+		gap: 10px;
+	}
+
+	.results{
+
+		margin-left: 80px;
+	}
+
+	#title{
+
+		background-color: rgba(0, 0, 0, 0.753);
+		color: rgb(252, 250, 250);
+		border-radius: 18px;
+	}
+
+	#writer{
+
+	border-radius: 20px;
+	border: 0px;
+	background-color: rgb(126, 125, 125);
+	color: rgba(255, 255, 255, 0.952);
+	padding: 3px;
+	padding-left: 8px;
+	padding-right: 8px;
+	width: 30%;
+	height: 20px;
+
+}
+
+#image{
+
+	color: rgb(0, 102, 255);
+	text-decoration: underline;
+}
+</style>
+
+<script src="app.js"></script>
+</body>
+</html>
