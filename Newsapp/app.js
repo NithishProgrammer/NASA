@@ -14,13 +14,13 @@ function search() {
 	}).then((data) => {
 		console.log(data);
 		if (data.results && data.results.length > 1) {
-			let firstArticle = data.results[2];
+			let firstArticle = data.results[2 , 3 , 4 , 5];
 			title.innerText = firstArticle.title;
-			content.innerText = firstArticle.content;
+			content.innerHTML = firstArticle.link;
 			writer.innerText = firstArticle.creator;
 			date.innerText = firstArticle.pubDate;
 			article.innerText = firstArticle.description;
-			image.innerText = firstArticle.image_url;
+			image.src = firstArticle.image_url;
 		} else {
 			title.innerText = "No results found";
 			content.innerText = "";
@@ -31,7 +31,8 @@ function search() {
 	}).catch((error) => {
 		console.error('Error fetching data:', error);
 	});
-
-
  
 }
+
+
+
