@@ -75,7 +75,7 @@ function search() {
 		
 		title.innerText = "No results found";
 		image.alt = "Not Found"
-			readfull.innerText = "Please Search"
+		
 			
 		
 	  }
