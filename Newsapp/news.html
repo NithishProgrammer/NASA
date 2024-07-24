@@ -9,7 +9,7 @@
 
 	<div class="flex">
 		<input type="name" title="search news" placeholder="Search for a News" id="search">
-		<button id="submit" onclick="search()">Search News</button>
+		<button id="submit" onclick="search()">Search</button>
 	</div>
 
 
@@ -21,36 +21,66 @@
 			<h5 id=""></h5>
 			<br>
 			<center>
-			<img src="" alt="" id="image">
+			<img src="https://www.niemanlab.org/images/finger-smartphone-screen-cc-700x394.jpg" alt="Img of searched article" id="image">
+			<br>
+			<h3 style="color: white; font-family: myFirstFont;" id="happytosearch">Happy to Search News! 🥳</h3>
+			<p style=" color: rgb(235, 227, 227);; font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;" id="para">Get one for a search 😊</p>
+
+			<p id="simplepara">Simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
 		</center>
-			<p><span id="article"></span></p>
+			<p id="short">Short:  <span id="article"></span></p>
 			<div class="wri">
-			<h4>Full Content: <span id="content"></span></h4>
+			
+			<button id="full">Read the full article</button>
 		</div>
-			<p>Writer: <span id="writer"></span></p>
-			<p>Date: <span id="date"></span></p>
+			<p class="wripara" id="wripara">Writer: <span id="writer"></span></p>
+			<p id="dat">Date: <span id="date"></span></p>
 
 
 
 		</div>
 	</div>
 <style>
+
+	body{
+
+		background-color: rgb(20, 20, 20);
+	}
 	
 	#search{
 
 		width: 80%;
-		height: 30px;
+		height: 36px;
 		border-radius: 12px;
 		border: solid 1px grey;
+		background-color: rgb(36, 35, 35);
+		color: white;
+
+	}
+
+	#search:focus{
+
+		background-color: rgb(56, 56, 56);
+		border: solid 1px rgb(255, 255, 255);
+	}
+
+	::placeholder{
+
+		color: white;
+		font-weight: bold;
 	}
 
 	#submit{
 
-		width: 18%;
+		width: fit-content;
 		height: 35px;
-		border: solid 1px lightgrey;
+		border: solid 2px rgb(255, 255, 255);
 		border-radius: 16px;
 		cursor: pointer;
+		padding: 6px 24px;
+		background-color: rgb(20, 20, 20);
+		color: white;
+		font-weight: bolder;
 	}
 
 	.flex{
@@ -69,24 +99,30 @@
 
 	#title{
 
-		background-color: rgba(0, 0, 0, 0.753);
+		background-color: rgba(99, 98, 98, 0.753);
 		color: rgb(252, 250, 250);
 		border-radius: 18px;
 		font-family: myFirstFont;
 		width: 90%;
+		color: white;
+		transition: 0.3s;
 	}
 
 	#writer{
 
 	border-radius: 20px;
-	border: 0px;
-	background-color: rgb(126, 125, 125);
+	border: solid 1px white;
+	background-color: rgb(75, 75, 75);
 	color: rgba(255, 255, 255, 0.952);
 	padding: 3px;
 	padding-left: 8px;
 	padding-right: 8px;
 	width: 30%;
 	height: 20px;
+	transition: 0.3s;
+	display: none;
+	
+	
 
 }
 
@@ -94,6 +130,7 @@
 
 	color: rgb(0, 102, 255);
 	text-decoration: underline;
+	transition: 0.3s;
 }
 
 #image{
@@ -102,6 +139,7 @@
 	border-radius: 12px;
 	border: solid 1px lightgrey;
 	object-fit: cover;
+	margin-bottom: 20px;
 }
 .wri{
 
@@ -116,7 +154,41 @@
 	color: rgb(0, 140, 255);
 	text-decoration: underline;
 	padding-left: 6px;
+	transition: 0.3s;
 }
+
+#full{
+
+	padding: 8px;
+	background-color: rgb(0, 0, 0);
+	color: white;
+	font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+	border-radius: 16px;
+	border: solid 2px rgb(228, 230, 230);
+	display: none;
+	cursor: pointer;
+	margin-bottom: 20px;
+	margin-top: 20px;
+}
+
+p{
+
+	color: white;
+	
+}
+
+#short{
+
+	margin-bottom: 20px;
+}
+
+#simplepara{
+
+	color: white;
+	margin-top: 40px;
+}
+
+
 </style>
 
 <script src="app.js"></script>
