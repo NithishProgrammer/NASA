@@ -34,7 +34,7 @@ function search() {
 
 	
 	
-		console.log('checked')
+		console.log('Left hand Mode')
 		readfull.style.float = "left";
 		readfull.style.marginBottom = "20px"
 		wripara.style.marginTop = "30px"
