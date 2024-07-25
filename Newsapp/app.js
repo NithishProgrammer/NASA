@@ -1,4 +1,4 @@
-let api = "https://newsdata.io/api/1/latest?apikey=" + "pub_47852a84e3103db1cc35655fa199918e20ae7 " ;
+let api = "https://newsdata.io/api/1/latest?apikey=" + "pub_47852a84e3103db1cc35655fa199918e20ae7 " + "&language=en" ;
 let title = document.getElementById('title');
 let wripara = document.getElementById('wripara');
 let writer = document.getElementById('writer');
