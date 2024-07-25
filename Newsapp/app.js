@@ -1,4 +1,4 @@
-let api = "https://newsdata.io/api/1/latest?apikey=pub_47852a84e3103db1cc35655fa199918e20ae7&language=en";
+let api = "https://newsdata.io/api/1/latest?apikey=" + "pub_47852a84e3103db1cc35655fa199918e20ae7 " + "&language=en";
 let title = document.getElementById('title');
 let wripara = document.getElementById('wripara');
 let writer = document.getElementById('writer');
@@ -11,11 +11,49 @@ let simplepara = document.getElementById('simplepara')
 let happytosearch = document.getElementById('happytosearch')
 let para = document.getElementById('para')
 let short = document.getElementById('short')
+let checkbox = document.getElementById('wings');
 short.style.display = "none"
 wripara.style.display = "none"
 date.style.display = "none"
 dat.style.display = "none"
+
+function info() {
+
+
+	
+}
+
+
+
 function search() {
+
+	let readfull = document.getElementById('full');
+	
+
+	if (checkbox.checked) {
+
+	
+	
+		console.log('checked')
+		readfull.style.float = "left";
+		readfull.style.marginBottom = "20px"
+		wripara.style.marginTop = "30px"
+		
+		
+
+		
+
+		
+	
+		
+	}
+
+	else{
+
+		readfull.style.float = "right";
+		
+
+	}
 
 	date.style.display = "inline"
 	wripara.style.display = "inline"
@@ -28,7 +66,7 @@ function search() {
 	wripara.style.color = "white"
 	writer.style.color = "white"
 	short.style.color = "white"
-	let readfull = document.getElementById('full');
+	
 	readfull.style.display = "inline"
 	happytosearch.style.display = "none"
 	para.style.display = "none"
@@ -39,7 +77,8 @@ function search() {
 	}).then((data) => {
 		console.log(data);
 		if (data.results && data.results.length > 1) {
-			let firstArticle = data.results[2 , 3 , 4 , 5];
+			let firstArticle = data.results[0 , 1 , 2 , 3 , 4 , 5 , 6 , 7 , 8];
+			
 			title.innerText = firstArticle.title;
 			writer.innerText = firstArticle.creator;
 			date.innerText = firstArticle.pubDate;
