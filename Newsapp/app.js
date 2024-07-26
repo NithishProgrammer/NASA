@@ -1,4 +1,4 @@
-let api = "https://newsdata.io/api/1/latest?apikey=" + "pub_478529497f70a81ae4121958687a911b32ce0" + "&language=en" ;
+let api = "https://newsdata.io/api/1/latest?apikey=pub_478529497f70a81ae4121958687a911b32ce0" + "&language=en";
 let title = document.getElementById('title');
 let wripara = document.getElementById('wripara');
 let writer = document.getElementById('writer');
@@ -34,7 +34,7 @@ function search() {
 
 	
 	
-		console.log('Left hand Mode')
+		console.log('checked')
 		readfull.style.float = "left";
 		readfull.style.marginBottom = "20px"
 		wripara.style.marginTop = "30px"
@@ -84,6 +84,14 @@ function search() {
 			date.innerText = firstArticle.pubDate;
 			article.innerText = firstArticle.description;
 			image.src = firstArticle.image_url;
+
+			if (firstArticle.creator == null) {
+
+	
+	
+				writer.innerText = "Not found"
+				
+			}
 			orgin.addEventListener("click" , function(){
 
 				window.location.href = firstArticle.link;
@@ -94,7 +102,7 @@ function search() {
 		} else {
 			title.innerText = "No results found";
 			content.innerText = "";
-			writer.innerText = "";
+			writer.innerText = "Not found";
 			date.innerText = "";
 			article.innerText = "";
 			image.alt = "Not Found"
@@ -118,6 +126,8 @@ function search() {
 			
 		
 	  }
+
+	
 	
 	
 }
