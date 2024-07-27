@@ -6,6 +6,8 @@
 	<title>News web</title>
 	<script src="https://unpkg.com/@popperjs/core@2/dist/umd/popper.min.js"></script>
 	<script src="https://unpkg.com/tippy.js@6/dist/tippy-bundle.umd.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
 	<link
   rel="stylesheet"
   href="https://unpkg.com/tippy.js@6/animations/scale.css"
@@ -27,7 +29,7 @@
 			<h5 id=""></h5>
 			<br>
 			<center>
-			<img src="https://www.niemanlab.org/images/finger-smartphone-screen-cc-700x394.jpg" alt="Img of searched article" id="image">
+			<img src="https://www.niemanlab.org/images/finger-smartphone-screen-cc-700x394.jpg" alt="Img of searched article" id="image" class="srcimg">
 			<p>All the images are taken from the offical fetch. All the contents here are displayed by your search from various news channels and webs across the world. </p>
 			<br>
 			<h3 style="color: white; font-family: myFirstFont;" id="happytosearch">Happy to Search News! 🥳</h3>
@@ -289,6 +291,20 @@ input[type=checkbox]{
 tippy('#tooltip', {
         content: 'Click and search if Left Handed',
       });
+
+	  gsap.from('.flex' , 1.2 , {opacity:0, y:-150, delay: 0.5})
+	  gsap.from('.srcimg' , 1.2 , {opacity:50, y:10, delay: 3.3})
+
+
+
+	  gsap.registerPlugin(ScrollTrigger)
+	  gsap.to(".copywr" , {
+
+		scrollTrigger: ".copywr",
+		x: 100,
+		rotation: 360,
+		duration: 2
+	  });
 </script>
 
 
