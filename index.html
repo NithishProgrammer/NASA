@@ -4,34 +4,82 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>NASA API Test</title>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" integrity="sha512-7eHRwcbYkK4d9g/6tD/mhkf++eoTHwpNM9woBxtPUBWm67zeAfFC+HrdoE2GanKeocly/VxeLvIqwvCdk7qScg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://unpkg.com/split-type"></script>
+    <script src="https://unpkg.com/lenis@1.1.8/dist/lenis.min.js"></script> 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js" integrity="sha512-onMTRKJBKz8M1TnqqDuGBlowlH0ohFzMXYRNebz+yOcc5TQr/zAKsthzhuv0hiyUKEiQEQXEynnXCvNTOk50dg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 </head>
 <body>
     <div class="container">
-        <h1>NASA Live API test</h1>
-        <p>By Nithish S, authenticated</p>
-        <input type="text" id="search-input" placeholder="Search for images...">
+        <h1 style="color: white;" id="TExt">NASA Live API test</h1>
+        <p style="color: rgb(185, 184, 184);">By Nithish S, authenticated</p>
+        <input type="text" id="search-input" placeholder="Search for images..." class="seam-search">
         <button id="search-button" class="buttons">Search</button>
         <button id="track-button"  class="buttons">Track</button>
         <button id="live-button"  class="buttons">Live View</button>
-        <div id="results"></div>
+        <div id="results" class="results"></div>
     </div>
 
     <style>
 body {
     font-family: Arial, sans-serif;
     text-align: center;
-    background-color: #021f2a;
-    margin: 0;
+    background: rgb(29, 29, 29);
     padding: 0;
+    overflow-x: hidden;
+    overflow-y: hidden;
+
 }
 
 .container {
     max-width: 100%;
     margin: 50px auto;
-    background: #bad0f3;
+    background-image: url(https://i0.wp.com/images.squarespace-cdn.com/content/v1/62fbfbed423b4f1bb8caed31/40981286-6f59-4fe5-a3a6-85abf10d94db/v2-5j5rs-rhlnf.jpg?ssl=1);
+    margin: 0;
+    background-repeat: repeat-y;
+   background-size: 100%;
     padding: 20px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    
+
+    
 }
+
+@media screen and (max-width:600px) {
+
+    .container{
+        background-image: url(https://images.pexels.com/photos/2098427/pexels-photo-2098427.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1);
+        background-size: 100%;
+        background-blend-mode: screen;
+    }
+    
+}
+
+@media screen and (max-width: 1024px) {
+
+    ::-webkit-scrollbar {
+
+        display: none;
+        
+
+}
+    
+}
+
+::-webkit-scrollbar {
+width: 20px;
+border-radius: 10px;
+border: solid 1px lightgray;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgb(224, 224, 224); 
+  border-radius: 10px;
+}
+
+
+
 
 img {
     max-width: 100%;
@@ -39,11 +87,13 @@ img {
     margin-bottom: 20px;
     padding: 10px;
     border-radius: 16px;
+    overflow-x: hidden;
 }
 
 #results img {
     margin: 10px;
     cursor: pointer;
+    object-fit: cover;
 }
 
 input, button {
@@ -54,6 +104,7 @@ input, button {
 
 h2 {
     margin-top: 30px;
+    color: white;
 }
 
 .buttons{
@@ -76,6 +127,8 @@ h2 {
   height: 900px;
   overflow: scroll;
   scroll-behavior: smooth;
+  color: white;
+  overflow-x: hidden;
 }
 
 
@@ -193,8 +246,76 @@ document.addEventListener("DOMContentLoaded", function() {
 
 
 
-    </script>
 
-    <p style="color: white;">NASA &nbsp; API can also be wrong sometimes. So, Check once</p>
+
+    </script>
+    <div class="verify">
+
+    <p style="color: white;" >NASA &nbsp; API can also be wrong sometimes. So, Check once</p>
+</div>
+
+
+    <script>
+
+        let tl = gsap.timeline({
+
+            scrollTrigger:{
+
+                trigger: '.verify' ,
+                start: '10' ,
+                end: 'bottom center' ,
+                scrub: true ,
+                marker: false
+            }
+        })
+
+        tl.from('.verify' ,{
+
+            x: 10
+        })
+
+
+        gsap.from('.seam-search' , {
+
+        opacity: 0 ,
+        y: -150 ,
+        delay: 0.5 ,
+        duration: 1
+})
+
+gsap.from('.buttons' , {
+
+opacity: 0 ,
+y: -150 ,
+delay: 1.0 ,
+duration: 1
+})
+
+let t = new SplitType('#TExt')
+
+
+gsap.from('.char' , {
+
+    y: 20 ,
+    stagger: 0.07 ,
+    delay: 0.5 ,
+    duration: 1
+})
+
+
+const lenis = new Lenis()
+
+lenis.on('scroll', (e) => {
+  console.log(e)
+})
+
+function raf(time) {
+  lenis.raf(time)
+  requestAnimationFrame(raf)
+}
+
+requestAnimationFrame(raf)
+
+    </script>
 </body>
 </html>
