@@ -225,12 +225,15 @@ p{
 #short{
 
 	margin-bottom: 20px;
+	text-decoration: underline white;
+	text-underline-offset: 6px;
 }
 
 #simplepara{
 
 	color: white;
 	margin-top: 40px;
+	
 }
 .master{
 
@@ -286,6 +289,16 @@ input[type=checkbox]{
 
 </style>
 
+<py-script>
+	import random
+	from js import document
+
+	x = "Hey, Have a search 🔍" , "You are here, This is cool 😎 🔍" , "Nice to have You here for News Search 😊 🔍" , "We're so glad you joined us 😊"
+	result = random.choices(x)
+	wripara = document.getElementById('happytosearch');
+	wripara.innerText = result
+</py-script>
+
 <script src="app.js"></script>
 
 <script>
@@ -305,20 +318,14 @@ tippy('#tooltip', {
 		scrollTrigger: ".copywr",
 		x: 100,
 		rotation: 360,
-		duration: 2
+		duration: 1
 	  });
 </script>
 
-<py-script>
-	import random
-	from js import document
 
-	x = "Hey, Have a search 🔍" , "You are here, This is cool 😎 🔍" , "Nice to have You here for News Search 😊 🔍" , "We're so glad you joined us 😊"
-	result = random.choices(x)
-	wripara = document.getElementById('happytosearch');
-	wripara.innerText = result
-</py-script>
 
+
+<input type="text" spellcheck="true" lang="en">
 
 
 </body>
