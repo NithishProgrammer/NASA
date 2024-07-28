@@ -8,6 +8,8 @@
 	<script src="https://unpkg.com/tippy.js@6/dist/tippy-bundle.umd.js"></script>
 	<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
 	<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
+	<link rel="stylesheet" href="https://pyscript.net/releases/2024.7.1/core.css">
+      <script type="module" src="https://pyscript.net/releases/2024.7.1/core.js"></script>
 	<link
   rel="stylesheet"
   href="https://unpkg.com/tippy.js@6/animations/scale.css"
@@ -306,6 +308,16 @@ tippy('#tooltip', {
 		duration: 2
 	  });
 </script>
+
+<py-script>
+	import random
+	from js import document
+
+	x = "Hey, Have a search 🔍" , "You are here, This is cool 😎 🔍" , "Nice to have You here for News Search 😊 🔍" , "We're so glad you joined us 😊"
+	result = random.choices(x)
+	wripara = document.getElementById('happytosearch');
+	wripara.innerText = result
+</py-script>
 
 
 
